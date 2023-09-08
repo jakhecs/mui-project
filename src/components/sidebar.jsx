@@ -17,7 +17,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import GroupIcon from "@mui/icons-material/Group";
 import ModeNightIcon from "@mui/icons-material/ModeNight";
 
-const Sidebar = () => {
+const Sidebar = ({ setMode, mode }) => {
   return (
     <Box
       flex={1}
@@ -95,11 +95,13 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            <ListItemButton component="a">
               <ListItemIcon>
                 <ModeNightIcon />
               </ListItemIcon>
-              <Switch />
+              <Switch
+                onChange={(e) => setMode(mode === "light" ? "dark" : "light")}
+              />
             </ListItemButton>
           </ListItem>
         </List>
