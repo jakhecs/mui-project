@@ -1,5 +1,5 @@
 import { Box, Stack, ThemeProvider, createTheme } from "@mui/material";
-import { Feed, Navbar, Rightbar, Sidebar, Add } from "./components";
+import { Feed, Navbar, Rightbar, Sidebar, Add, Form } from "./components";
 import { useState } from "react";
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
           <Rightbar />
         </Stack>
         <Add />
+        {/* <Form /> */}
       </Box>
     </ThemeProvider>
   );
