@@ -1,15 +1,15 @@
-"use client";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpSchema } from "../lib/types";
 
 const Form = () => {
   const {
     reset,
     register,
-    getValues,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ resolver: zodResolver(signUpSchema) });
 
   const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -17,22 +17,10 @@ const Form = () => {
   };
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
-      <input
-        {...register("email", {
-          required: "Email obligatoire",
-        })}
-        type="email"
-        placeholder="Email"
-      />
+      <input {...register("email")} type="email" placeholder="Email" />
       {errors.email && <p className="error">{`${errors.email.message}`} </p>}
       <input
-        {...register("password", {
-          required: "Mot de passe obligatoire",
-          minLength: {
-            value: 5,
-            message: "Le mot de passe doit avoir minimum 5 caractère",
-          },
-        })}
+        {...register("password")}
         type="password"
         placeholder="Mot de passe"
       />
@@ -41,12 +29,7 @@ const Form = () => {
       )}
 
       <input
-        {...register("confirmPassword", {
-          required: "Confirmer le mot de passe SVP",
-          validate: (value) =>
-            value === getValues("password") ||
-            "Les mots de passe doivent être identiques",
-        })}
+        {...register("confirmPassword")}
         type="password"
         placeholder="Confirmer mot de passe "
       />
